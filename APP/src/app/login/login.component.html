@@ -1,0 +1,24 @@
+<div class="container body-form text-center">
+    <form #loginForm="ngForm" class="form-signin" (ngSubmit)="login(loginForm.value)">
+        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <input type="email" required #email="ngModel" email ngModel id="inputEmail" name="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" required #password="ngModel" ngModel id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="loginForm.invalid">Sign in</button>
+        <br />
+        <p style="margin-top: 10%;">Not registered yet? </p>
+        <a href="#" class="link-primary" routerLink="/register">Register Form</a> 
+        <p class="mt-5 mb-3 text-muted">&copy; 2023-2024</p>
+      </form>
+</div>
+
+<div class="container text-center" *ngIf="showAlert">
+  <div class="{{ classAlertMessage }}" role="alert">
+      {{ resultMessage }}
+  </div>
+</div>

@@ -1,0 +1,14 @@
+html,
+.body-form {
+  height: 100%;
+}
+
+.body-form { 
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #fefcfc;
+}
+
+.left {
+    float: left;
+}

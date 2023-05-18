@@ -1,0 +1,33 @@
+<div class="container body-form text-center">
+    <form #createUserForm="ngForm" (ngSubmit)="saveUser(createUserForm.value)" class="form-signin">
+        <img class="mb-4" src="https://getbootstrap.com/docs/4.0/assets/brand/bootstrap-solid.svg" alt="" width="72"
+            height="72">
+        <h1 class="h3 mb-3 font-weight-normal">Register Form</h1>
+        <div class="form-group">
+            <input type="text" name="name" #name="ngModel" minlength="4" required ngModel class="form-control"
+                id="inputName" placeholder="Name">
+            <span *ngIf="name.invalid && name.touched" style="color: red;">Enter a valid name.</span>
+        </div>
+        <div class="form-group">
+            <input type="email" name="email" required #email="ngModel" email ngModel class="form-control" id="iputEmail"
+                aria-describedby="emailHelp" placeholder="Enter email">
+            <span *ngIf="email.invalid && email.touched" style="color: red;">Enter a valid email.</span>
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" required #password="ngModel" minlength="8" ngModel
+                class="form-control" id="inputPassword" placeholder="Password">
+            <span *ngIf="password.invalid && password.touched" style="color: red;">Enter a valid password.</span>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="createUserForm.invalid">Register</button>
+        <br />
+        <br />
+        <span>Already have an account?</span>
+        <button class="btn btn-link" routerLink="/login">click here to login</button>
+    </form>
+
+</div>
+<div class="container text-center" *ngIf="showAlert">
+    <div class="{{ classMessageAlert }}" role="alert">
+        {{ resultMessage }}
+    </div>
+</div>
