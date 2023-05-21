@@ -26,6 +26,11 @@ public class UserRepository : IUserRepository
         return await _dbContext.Users.AnyAsync(x => x.Email == email);
     }
 
+    public async Task<User?> GetUserById(Guid id)
+    {
+        return await _dbContext.Users.SingleOrDefaultAsync(x => x.Id == id);
+    }
+
     public async Task<User?> GetUserByEmailAndPassword(string email, string password)
     {
         return await _dbContext.Users.SingleOrDefaultAsync(x => x.Email == email && x.Password == password);

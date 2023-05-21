@@ -17,6 +17,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IToDoService, ToDoService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
 
 builder.Services.AddControllers
     (options => options.Filters.Add(typeof(ValidationFilter)))
