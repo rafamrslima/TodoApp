@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ITodo } from '../interfaces/todo';
 import { ToDoService } from '../services/todo.service';
 
 @Component({
@@ -9,32 +8,31 @@ import { ToDoService } from '../services/todo.service';
 })
 export class TodoListComponent {
 
-  constructor(private service: ToDoService) {
-    this.todoList = [ 
-      { id: 1, title: 'Shopping', 
-        creationDate: new Date(2023, 6, 21), 
-        deadline: new Date(2023, 6, 25), 
-        done: false 
-      }]
+  constructor(private service: ToDoService) { 
+      this.getTodoList();
+      this.userId = localStorage.getItem('userId') ?? '';
   }
 
-  todoList: ITodo[] = [];
+  todoList: any = [];
+  userId: string = '';
 
    getTodoList() {
-    this.service.GetTodoList(1).subscribe(data => {
-      //this.todoList.push(data);
-      console.log(data);
-    },
-    error => {}
-    )
+    var userId = localStorage.getItem('userId');
+    if(userId === null)
+      return; //error
+   
+     this.service.GetTodoList(userId).subscribe((res: {}) => {
+      this.todoList = res;
+    });
    }
 
    saveItem(content: any){
     console.log(content);
-    this.service.sendCreateTodoRequest(1, content.title, content.deadline).subscribe(data => {
-      console.log(data);
+    var userId = localStorage.getItem('userId'); 
+    this.service.createTodoRequest(this.userId, content.title, content.deadline).subscribe(data => { 
+      this.getTodoList();
     },
-    error => {}
+    function (error) { }
     )
    }
 }

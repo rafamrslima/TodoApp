@@ -15,7 +15,6 @@ export class LoginComponent {
   showAlert = false;
   resultMessage = '';
   classAlertMessage = '';
-  jsonWebToken = '';
 
   login(data: any) {
     if (data.email == '' || data.password == '')
@@ -23,7 +22,8 @@ export class LoginComponent {
 
     this.service.sendLoginRequest(data.email, data.password).subscribe(
       data => {
-        this.jsonWebToken = data.body.token;
+        localStorage.setItem('userId', data.body.userId);
+        localStorage.setItem('token', data.body.token);
         this.resultMessage = 'Login successfully works.';  
         this.showAlert = true;
         this.classAlertMessage = 'alert alert-success';

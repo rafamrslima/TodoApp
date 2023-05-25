@@ -7,6 +7,6 @@ namespace MyApp.API.Core.Interfaces
 	public interface IToDoService
 	{
 		Task<Guid> CreateToDoItem(ToDoCreationDTO toDoCreationDTO);
-	}
+        Task<List<ToDoViewModel>> GetTodoItemsByUserId(Guid userId);
+    }
 }
-

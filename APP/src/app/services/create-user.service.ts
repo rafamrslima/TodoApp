@@ -11,7 +11,7 @@ export class CreateUserService {
 
   apiUrl: string = 'https://localhost:7084/user/create';
 
-  sendCreateUserRequest(userData: IUser) {
+  createUserRequest(userData: IUser) {
     return this.http.post<any>(this.apiUrl, userData, {observe: 'response'}); 
   }
 }

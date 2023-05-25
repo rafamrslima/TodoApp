@@ -16,7 +16,7 @@ export class CreateUserComponent {
   classMessageAlert = '';
 
   saveUser(data: IUser) {
-    this.service.sendCreateUserRequest(data).subscribe(
+    this.service.createUserRequest(data).subscribe(
       (result) => {
         this.resultMessage = "User registered successfully."; 
         this.showAlert = true;

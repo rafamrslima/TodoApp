@@ -23,7 +23,10 @@ namespace MyApp.API.Infrastructure.Repositories
 
         public async Task<List<ToDo>> GetTodoItemsByUserId(Guid userId)
         {
-            throw new NotImplementedException();
+            return await _dbContext.ToDos
+                .Where(u => u.OwnerId == userId)
+                .OrderByDescending(x=> x.CreationDate)
+                .ToListAsync();
         }
     }
 }

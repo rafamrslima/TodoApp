@@ -39,7 +39,8 @@ public class UserService : IUserService
             throw new KeyNotFoundException("User or password invalid.");
 
         var token = _authService.GenerateJwtToken(email, Roles.User);
-        return new LoginResultDTO(user.Email, token);
+        return new LoginResultDTO(user.Id, user.Email, token);
+         
     }
 }
 

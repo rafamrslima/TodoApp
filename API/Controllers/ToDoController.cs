@@ -23,6 +23,13 @@ namespace MyApp.API.Controllers
             var result = await _toDoInterface.CreateToDoItem(toDoDTO);
             return Ok(result);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetToDoItemsByUser([FromQuery] Guid userId)
+        {
+            var result = await _toDoInterface.GetTodoItemsByUserId(userId);
+            return Ok(result);
+        }
     }
 }
 

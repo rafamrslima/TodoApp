@@ -19,13 +19,33 @@ namespace MyApp.API.Application.Services
 
         public async Task<Guid> CreateToDoItem(ToDoCreationDTO toDoCreationDTO)
         {
-            var user = await _userRepository.GetUserById(toDoCreationDTO.OwnerId);
-            if (user == null)
-                throw new ArgumentException("User not found.");
+            await CheckIfUserExists(toDoCreationDTO.OwnerId);
 
             var toDo = new ToDo(toDoCreationDTO.Title, toDoCreationDTO.Deadline, toDoCreationDTO.OwnerId);
             return await _toDoRepository.CreateToDo(toDo);
         }
+
+        public async Task<List<ToDoViewModel>> GetTodoItemsByUserId(Guid userId)
+        { 
+            await CheckIfUserExists(userId);
+
+            var items = await _toDoRepository.GetTodoItemsByUserId(userId);
+            var toDoItemsViewModel = new List<ToDoViewModel>();
+
+            foreach (var item in items)
+            {
+                toDoItemsViewModel.Add(new ToDoViewModel(item.Id, item.Title, item.CreationDate, item.Deadline, item.Done));
+            }
+
+            return toDoItemsViewModel;
+        }
+
+        private async Task CheckIfUserExists(Guid userId)
+        {
+            var user = await _userRepository.GetUserById(userId);
+            if (user == null)
+                throw new ArgumentException("User not found.");
+        } 
     }
 }
 
