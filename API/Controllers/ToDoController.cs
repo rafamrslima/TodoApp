@@ -10,24 +10,24 @@ namespace MyApp.API.Controllers
     [Route("[controller]")]
     public class ToDoController : ControllerBase
     {
-        private readonly IToDoService _toDoInterface;
+        private readonly IToDoService _toDoService;
 
-		public ToDoController(IToDoService toDoInterface)
+		public ToDoController(IToDoService toDoService)
 		{
-            _toDoInterface = toDoInterface;
+            _toDoService = toDoService;
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> CreateToDoItem([FromBody] ToDoCreationDTO toDoDTO)
         {
-            var result = await _toDoInterface.CreateToDoItem(toDoDTO);
+            var result = await _toDoService.CreateToDoItem(toDoDTO);
             return Ok(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetToDoItemsByUser([FromQuery] Guid userId)
         {
-            var result = await _toDoInterface.GetTodoItemsByUserId(userId);
+            var result = await _toDoService.GetTodoItemsByUserId(userId);
             return Ok(result);
         }
     }
