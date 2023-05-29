@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyApp.API.Application.DTOs;
 using MyApp.API.Application.Services;
@@ -8,6 +9,7 @@ namespace MyApp.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ToDoController : ControllerBase
     {
         private readonly IToDoService _toDoService;

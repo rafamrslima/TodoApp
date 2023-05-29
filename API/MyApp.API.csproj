@@ -25,6 +25,7 @@
     </PackageReference>
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +50,7 @@
     <None Remove="FluentValidation.AspNetCore" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Application\Middlewares\" />
+    <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Infrastructure\" />
