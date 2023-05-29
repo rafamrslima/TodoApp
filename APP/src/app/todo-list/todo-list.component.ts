@@ -21,14 +21,13 @@ export class TodoListComponent {
     if(userId === null)
       return; //error
    
-     this.service.GetTodoList(userId).subscribe((res: {}) => {
+     this.service.getTodoList(userId).subscribe((res: {}) => {
       this.todoList = res;
     });
    }
 
    saveItem(content: any){
     console.log(content);
-    var userId = localStorage.getItem('userId'); 
     this.service.createTodoRequest(this.userId, content.title, content.deadline).subscribe(data => { 
       this.getTodoList();
     },

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, retry } from 'rxjs';
 import { ITodo } from '../interfaces/todo';
@@ -12,18 +12,25 @@ export class ToDoService {
 
   apiUrl: string = 'https://localhost:7084/todo';
 
-  createTodoRequest(userId:string, title: string, deadline: Date) {
+  createTodoRequest(userId:string, title: string, deadline: Date) : Observable<any> {
+    var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
     var body = { 
       ownerId: userId, 
       title: title, 
       deadline: deadline 
     };
-    return this.http.post<any>(this.apiUrl + '/create', body, {observe: 'response'}); 
+    return this.http.post<any>(this.apiUrl + '/create', body, {'headers': headers} ); 
   } 
 
-  GetTodoList(userId: string): Observable<ITodo> {
-    return this.http .get<ITodo>(this.apiUrl + '?userId=' + userId).pipe(retry(1));
+  getTodoList(userId: string): Observable<ITodo> {
+    
+    var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
+    return this.http.get<ITodo>(this.apiUrl + '?userId=' + userId, {'headers': headers}).pipe(retry(1));
   }
+
+  retrieveToken() {
+    return 'bearer ' + localStorage.getItem('token')??''; 
+  } 
 
   processError(err: any){
     console.log('error')
