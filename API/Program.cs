@@ -19,9 +19,9 @@ var connectionString = builder.Configuration.GetConnectionString("SqlConnection"
 builder.Services.AddDbContext<MyAppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IToDoService, ToDoService>();
+builder.Services.AddScoped<ITodoService, TodoService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IToDoRepository, ToDoRepository>();
+builder.Services.AddScoped<ITodoRepository, TodoRepository>();
 
 builder.Services.AddControllers
     (options => options.Filters.Add(typeof(ValidationFilter)))

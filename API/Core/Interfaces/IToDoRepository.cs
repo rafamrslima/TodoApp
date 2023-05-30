@@ -3,10 +3,12 @@ using MyApp.API.Core.Models;
 
 namespace MyApp.API.Core.Interfaces
 {
-	public interface IToDoRepository
+	public interface ITodoRepository
 	{
-		Task<Guid> CreateToDo(ToDo toDo);
-		Task<List<ToDo>> GetTodoItemsByUserId(Guid userId);
-	}
+		Task<Guid> CreateTodo(TodoItem toDo);
+		Task<List<TodoItem>> GetTodoItemsByUserId(Guid userId);
+		Task<TodoItem?> GetTodoItemById(Guid itemId);
+		Task UpdateStatusItem(Guid todoId, bool isComplete);
+    }
 }
 

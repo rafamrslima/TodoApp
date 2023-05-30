@@ -26,13 +26,20 @@ export class TodoListComponent {
     });
    }
 
-   saveItem(content: any){
-    console.log(content);
+   saveItem(content: any){ 
     this.service.createTodoRequest(this.userId, content.title, content.deadline).subscribe(data => { 
       this.getTodoList();
     },
     function (error) { }
     )
+   }
+
+   changeItemStatus(itemId: string, event: any) {
+    this.service.changeItemStatus(itemId, event.target.checked).subscribe(data => { 
+      this.getTodoList();
+    },
+    function (error) { }
+    ) 
    }
 }
 

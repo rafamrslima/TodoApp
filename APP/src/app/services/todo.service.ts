@@ -28,6 +28,12 @@ export class ToDoService {
     return this.http.get<ITodo>(this.apiUrl + '?userId=' + userId, {'headers': headers}).pipe(retry(1));
   }
 
+  changeItemStatus(itemId: string, isComplete:boolean) : Observable<any> {
+    var headers = new HttpHeaders().set('Authorization', this.retrieveToken()); 
+    var body = { isComplete: isComplete  };
+    return this.http.put<any>(this.apiUrl + '/' + itemId, body, {'headers': headers}); 
+  }
+
   retrieveToken() {
     return 'bearer ' + localStorage.getItem('token')??''; 
   } 

@@ -5,7 +5,7 @@ using MyApp.API.Application.DTOs;
 
 namespace MyApp.API.Application.Validators
 {
-	public class ToDoCreationValidator : AbstractValidator<ToDoCreationDTO>
+	public class ToDoCreationValidator : AbstractValidator<TodoCreationDTO>
 	{
 		public ToDoCreationValidator()
 		{

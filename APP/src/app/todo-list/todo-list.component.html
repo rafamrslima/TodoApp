@@ -34,7 +34,7 @@
                 <td>{{item.creationDate | date: 'dd/MM/yyyy' }} </td>
                 <td>{{item.deadline | date: 'dd/MM/yyyy' }}</td>
                 <td>
-                    <input class="form-check-input" type="checkbox" [checked]="item.done" id="flexCheckDefault">
+                    <input class="form-check-input" type="checkbox" [checked]="item.done" id="flexCheckDefault" (change)="changeItemStatus(item.id, $event)">
                 </td>
             </tr>
         </tbody>

@@ -11,11 +11,11 @@ public class MyAppDbContext : DbContext
     }
 
     public DbSet<User> Users { get; set; }
-    public DbSet<ToDo> ToDos { get; set; }
+    public DbSet<TodoItem> ToDos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<User>().HasKey(p => p.Id);
-        builder.Entity<ToDo>().HasKey(p => p.Id);
+        builder.Entity<TodoItem>().HasKey(p => p.Id);
     }
 }

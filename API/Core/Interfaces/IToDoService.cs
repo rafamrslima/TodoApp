@@ -4,9 +4,10 @@ using MyApp.API.Core.Models;
 
 namespace MyApp.API.Core.Interfaces
 {
-	public interface IToDoService
+	public interface ITodoService
 	{
-		Task<Guid> CreateToDoItem(ToDoCreationDTO toDoCreationDTO);
-        Task<List<ToDoViewModel>> GetTodoItemsByUserId(Guid userId);
+		Task<Guid> CreateTodoItem(TodoCreationDTO toDoCreationDTO);
+        Task<List<TodoViewModel>> GetTodoItemsByUserId(Guid userId);
+		Task UpdateItemStatus(Guid itemId, bool isComplete);
     }
 }
