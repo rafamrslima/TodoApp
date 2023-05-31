@@ -13,8 +13,12 @@ export class TodoListComponent {
       this.userId = localStorage.getItem('userId') ?? '';
   }
 
+  showAlert = false;
+  classMessageAlert = '';
+  resultMessage = ''
+
   todoList: any = [];
-  userId: string = '';
+  userId = '';
 
    getTodoList() {
     var userId = localStorage.getItem('userId');
@@ -29,17 +33,35 @@ export class TodoListComponent {
    saveItem(content: any){ 
     this.service.createTodoRequest(this.userId, content.title, content.deadline).subscribe(data => { 
       this.getTodoList();
+      this.resultMessage = 'Item added successfully';
+      this.showSuccessAlert();
     },
-    function (error) { }
+    (error) => {
+      this.showError(error);
+     }
     )
    }
 
    changeItemStatus(itemId: string, event: any) {
     this.service.changeItemStatus(itemId, event.target.checked).subscribe(data => { 
       this.getTodoList();
+      this.resultMessage = 'Item updated successfully';
+      this.showSuccessAlert();
     },
-    function (error) { }
-    ) 
+    (error) => {
+      this.showError(error);
+     }
+    )
+   }
+
+   showSuccessAlert(){
+    this.classMessageAlert = 'alert alert-success'
+    this.showAlert = true;
+   }
+
+   showError(error: any){
+    this.resultMessage = error.error.error?? "System is temporary unavailable, sorry for the incovinience."
+    this.showAlert = true;
+    this.classMessageAlert = 'alert alert-danger'
    }
 }
-

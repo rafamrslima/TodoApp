@@ -16,9 +16,10 @@ export class ToDoService {
     var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
     var body = { 
       ownerId: userId, 
-      title: title, 
-      deadline: deadline 
-    };
+      title: title,
+      ...(deadline && { deadline : deadline })
+    }; 
+ 
     return this.http.post<any>(this.apiUrl + '/create', body, {'headers': headers} ); 
   } 
 

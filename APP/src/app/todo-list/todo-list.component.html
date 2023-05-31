@@ -40,3 +40,9 @@
         </tbody>
     </table>
 </div>
+
+<div class="container text-center" *ngIf="showAlert">
+    <div class="{{ classMessageAlert }}" role="alert">
+        {{ resultMessage }}
+    </div>
+</div>

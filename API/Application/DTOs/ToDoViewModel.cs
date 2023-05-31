@@ -5,7 +5,7 @@ namespace MyApp.API.Application.DTOs
 {
 	public class TodoViewModel
 	{
-        public TodoViewModel(Guid id, string title, DateTime creationDate, DateTime deadline, bool isComplete)
+        public TodoViewModel(Guid id, string title, DateTime creationDate, DateTime? deadline, bool isComplete)
         {
             Id = id;
             Title = title;
@@ -17,7 +17,7 @@ namespace MyApp.API.Application.DTOs
         public Guid Id { get; set; }
         public string Title { get; set; }
         public DateTime CreationDate { get; set; }
-        public DateTime Deadline { get; set; }
+        public DateTime? Deadline { get; set; }
         public bool IsComplete { get; set; } 
     }
 }

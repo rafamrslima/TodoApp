@@ -5,9 +5,9 @@ using MyApp.API.Application.DTOs;
 
 namespace MyApp.API.Application.Validators
 {
-	public class ToDoCreationValidator : AbstractValidator<TodoCreationDTO>
+	public class TodoCreationValidator : AbstractValidator<TodoCreationDTO>
 	{
-		public ToDoCreationValidator()
+		public TodoCreationValidator()
 		{
             RuleFor(x => x.Title)
                 .NotEmpty()
