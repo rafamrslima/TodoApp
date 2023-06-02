@@ -25,7 +25,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Creation date</th>
                 <th scope="col">Deadline</th>
-                <th scope="col">Done</th>
+                <th scope="col">Is Complete</th>
             </tr>
         </thead>
         <tbody>
@@ -34,7 +34,7 @@
                 <td>{{item.creationDate | date: 'dd/MM/yyyy' }} </td>
                 <td>{{item.deadline | date: 'dd/MM/yyyy' }}</td>
                 <td>
-                    <input class="form-check-input" type="checkbox" [checked]="item.done" id="flexCheckDefault" (change)="changeItemStatus(item.id, $event)">
+                    <input class="form-check-input" type="checkbox" [checked]="item.isComplete" id="flexCheckDefault" (change)="changeItemStatus(item.id, $event)">
                 </td>
             </tr>
         </tbody>

@@ -3,5 +3,5 @@ export interface ITodo {
     title: string;
     creationDate: Date;
     deadline: Date;
-    done: boolean
+    isComplete: boolean
 }
