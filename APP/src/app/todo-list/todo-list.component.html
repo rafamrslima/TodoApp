@@ -1,7 +1,7 @@
 <div class="container body-form text-center">
     
     <h2>My To Do List</h2>
-    <form #addItemForm="ngForm" (ngSubmit)="saveItem(addItemForm.value)" class="form-signin">
+    <form #addItemForm="ngForm" (ngSubmit)="saveItem(addItemForm)" class="form-signin">
         <div class="row">
             <div class="col-md-8 form-group">
                 <input type="text" name="title" required #title="ngModel" ngModel class="form-control" id="inputTitle"
@@ -26,6 +26,7 @@
                 <th scope="col">Creation date</th>
                 <th scope="col">Deadline</th>
                 <th scope="col">Is Complete</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                 <td>
                     <input class="form-check-input" type="checkbox" [checked]="item.isComplete" id="flexCheckDefault" (change)="changeItemStatus(item.id, $event)">
                 </td>
+                <td><button class="btn btn-outline-danger">Delete</button></td>
             </tr>
         </tbody>
     </table>

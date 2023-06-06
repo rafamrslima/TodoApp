@@ -30,11 +30,13 @@ export class TodoListComponent {
     });
    }
 
-   saveItem(content: any){ 
+   saveItem(form: any){ 
+    var content = form.value;
     this.service.createTodoRequest(this.userId, content.title, content.deadline).subscribe(data => { 
       this.getTodoList();
       this.resultMessage = 'Item added successfully';
       this.showSuccessAlert();
+      form.reset();
     },
     (error) => {
       this.showError(error);
