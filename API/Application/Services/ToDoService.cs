@@ -2,7 +2,6 @@
 using MyApp.API.Application.DTOs;
 using MyApp.API.Core.Interfaces;
 using MyApp.API.Core.Models;
-using MyApp.API.Infrastructure.Repositories;
 
 namespace MyApp.API.Application.Services
 {
@@ -24,7 +23,7 @@ namespace MyApp.API.Application.Services
             var toDo = new TodoItem(toDoCreationDTO.Title, toDoCreationDTO.Deadline, toDoCreationDTO.OwnerId);
             return await _todoRepository.CreateTodo(toDo);
         }
-
+ 
         public async Task<List<TodoViewModel>> GetTodoItemsByUserId(Guid userId)
         { 
             await CheckIfUserExists(userId);
@@ -53,9 +52,32 @@ namespace MyApp.API.Application.Services
         private async Task CheckIfUserExists(Guid userId)
         {
             var user = await _userRepository.GetUserById(userId);
-            if (user == null)
-                throw new ArgumentException("User not found.");
-        } 
+            if (user != null) return; 
+            throw new ArgumentException("User not found.");
+        }
+
+        public async Task EditItem(Guid itemId, EditTodoDTO editTodoDTO)
+        {
+            var item = await _todoRepository.GetTodoItemById(itemId);
+
+            if (item == null)
+                throw new ArgumentException("Todo item not found.");
+
+            if(editTodoDTO.Deadline < DateTime.Now)
+                throw new ArgumentException("Deadline has to be greater than current date.");
+
+            await _todoRepository.EditItem(itemId, editTodoDTO.Title, editTodoDTO.Deadline);
+        }
+
+        public async Task DeleteItem(Guid itemId)
+        {
+            var item = await _todoRepository.GetTodoItemById(itemId);
+
+            if (item == null)
+                throw new ArgumentException("Todo item not found.");
+
+            await _todoRepository.DeleteItem(itemId);
+        }
     }
 }
 

@@ -37,5 +37,19 @@ public class ToDoController : ControllerBase
         await _toDoService.UpdateItemStatus(itemId, updateTodoStatusDTO.IsComplete);
         return NoContent();
     }
+
+    [HttpPut("Edit/{itemId}")]
+    public async Task<IActionResult> EditItem(Guid itemId, [FromBody] EditTodoDTO editTodoDTO)
+    {
+        await _toDoService.EditItem(itemId, editTodoDTO);
+        return NoContent();
+    }
+
+    [HttpDelete("{itemId}")]
+    public async Task<IActionResult> Delete(Guid itemId)
+    {
+        await _toDoService.DeleteItem(itemId);
+        return NoContent();
+    }
 }
 
