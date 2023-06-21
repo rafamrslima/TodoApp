@@ -12,7 +12,7 @@ export class ToDoService {
 
   apiUrl: string = 'https://localhost:7084/todo';
 
-  createTodoRequest(userId:string, title: string, deadline: Date) : Observable<any> {
+  createTodo(userId:string, title: string, deadline: Date) : Observable<any> {
     var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
     var body = { 
       ownerId: userId, 
@@ -22,6 +22,21 @@ export class ToDoService {
  
     return this.http.post<any>(this.apiUrl + '/create', body, {'headers': headers} ); 
   } 
+
+  editTodo(todoId:string, title: string, deadline: Date) : Observable<any> {
+    var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
+    var body = {
+      ...(title && { title : title }),
+      ...(deadline && { deadline : deadline })
+    }; 
+ 
+    return this.http.put<any>(this.apiUrl + '/edit/' + todoId, body, {'headers': headers} ); 
+  } 
+
+  deleteTodo(todoId: number) : Observable<any>{
+    var headers = new HttpHeaders().set('Authorization', this.retrieveToken());
+    return this.http.delete<any>(this.apiUrl + '/' + todoId, {'headers': headers} ); 
+  }
 
   getTodoList(userId: string): Observable<ITodo> {
     

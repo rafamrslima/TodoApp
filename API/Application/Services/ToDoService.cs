@@ -63,7 +63,7 @@ namespace MyApp.API.Application.Services
             if (item == null)
                 throw new ArgumentException("Todo item not found.");
 
-            if(editTodoDTO.Deadline < DateTime.Now)
+            if(item.Deadline != editTodoDTO.Deadline && editTodoDTO.Deadline < DateTime.Now)
                 throw new ArgumentException("Deadline has to be greater than current date.");
 
             await _todoRepository.EditItem(itemId, editTodoDTO.Title, editTodoDTO.Deadline);
