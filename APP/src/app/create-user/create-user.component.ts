@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IUser } from '../interfaces/user';
 import { CreateUserService } from '../services/create-user.service';
 
 @Component({
@@ -15,13 +14,13 @@ export class CreateUserComponent {
   resultMessage = '';
   classMessageAlert = '';
 
-  saveUser(data: IUser) {
-    this.service.createUserRequest(data).subscribe(
+  saveUser(form: any) {
+    this.service.createUserRequest(form.value).subscribe(
       () => {
         this.resultMessage = "User registered successfully."; 
-        this.showAlert = true;
+        this.showAlertWithTimeout();
         this.classMessageAlert = 'alert alert-success'
-         
+        form.reset();
       },
         (error) => { 
         let errorMessage: string | null = null;
@@ -34,8 +33,15 @@ export class CreateUserComponent {
           }
         }
         this.resultMessage = errorMessage?? "System is temporary unavailable, sorry for the incovinience."
-        this.showAlert = true;
+        this.showAlertWithTimeout();
         this.classMessageAlert = 'alert alert-danger'
       });  
+  }
+
+  showAlertWithTimeout() {
+    this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 3000);
   }
 }

@@ -95,13 +95,13 @@ export class TodoListComponent {
 
    showSuccessAlert(){
     this.classMessageAlert = 'alert alert-success'
-    this.showAlert = true;
+    this.showAlertWithTimeout();
    }
 
    showError(errorMessage: any){ 
-    this.resultMessage = errorMessage?? "System is temporary unavailable, sorry for the incovinience."
-    this.showAlert = true;
+    this.resultMessage = errorMessage?? "System is temporary unavailable, sorry for the incovinience.";
     this.classMessageAlert = 'alert alert-danger'
+    this.showAlertWithTimeout();
    }
 
    editItem(item:any) {  
@@ -131,4 +131,11 @@ export class TodoListComponent {
       this.showError(error.error.error);
      })
    }
+
+   showAlertWithTimeout() {
+    this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 3000);
+  }
 }
