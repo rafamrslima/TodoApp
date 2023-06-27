@@ -4,7 +4,7 @@
     <form #addItemForm="ngForm" (ngSubmit)="saveItem(addItemForm)" class="form-signin">
         <div class="row">
             <div class="col-md-8 form-group">
-                <input type="text" name="title" required #title="ngModel" ngModel class="form-control" id="title"
+                <input type="text" name="title" minlength="3" required #title="ngModel" ngModel class="form-control" id="title"
                 placeholder="Title">
             <span *ngIf="title.invalid && title.touched" style="color: red;">Enter a valid title.</span>
             </div>

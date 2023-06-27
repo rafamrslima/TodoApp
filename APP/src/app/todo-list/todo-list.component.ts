@@ -51,16 +51,9 @@ export class TodoListComponent {
         this.refreshPage(form);
       },
       (error) => {
-        let errorMessage: string | null = null;
-        if(error.error.errors){
-          errorMessage = '';
-          const errorKeys = Object.keys(error.error.errors);
-           
-          for (const key of errorKeys) {
-            errorMessage += error.error.errors[key].join(' ');
-          } 
-        }
-        this.showError(errorMessage);
+        let errorMessage: string | null = null; 
+        errorMessage = this.getErrorMessage(error, errorMessage);  
+        this.showError(errorMessage); 
       })
    }
 
@@ -72,10 +65,27 @@ export class TodoListComponent {
         this.refreshPage(form);
         this.isEdit = false;
       },
-      (error) => {
-        this.showError(error.error.error);
+      (error) => { 
+        let errorMessage: string | null = null; 
+        errorMessage = this.getErrorMessage(error, errorMessage);  
+        this.showError(errorMessage); 
       })
    }
+
+   getErrorMessage(error: any, errorMessage: string | null) {
+    if (error.error.errors) {
+      errorMessage = '';
+      const errorKeys = Object.keys(error.error.errors);
+
+      for (const key of errorKeys) {
+        errorMessage += error.error.errors[key].join(' ');
+      }
+    }
+    else if (error.error.error) {
+      errorMessage = error.error.error;
+    }
+    return errorMessage;
+  }
 
    refreshPage(form: any){
     form.reset();

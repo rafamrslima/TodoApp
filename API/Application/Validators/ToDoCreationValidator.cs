@@ -13,6 +13,10 @@ namespace MyApp.API.Application.Validators
                 .NotEmpty()
                 .WithMessage("Title cannot be empty.");
 
+            RuleFor(x => x.Title)
+                .MinimumLength(3)
+                .WithMessage("Title must have at least 3 characters.");
+
             RuleFor(x => x.OwnerId)
 				.NotNull()
                 .NotEmpty()
